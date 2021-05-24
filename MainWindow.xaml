@@ -1,0 +1,48 @@
+﻿<Window x:Class="Tasker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tasker"
+        DataContext = "{Binding RelativeSource={RelativeSource Self}}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu x:Name="MainMenu" Grid.Column="0" Grid.Row="0">
+            <MenuItem Header="_New Database" x:Name="newDatabase" Click="newDatabase_Click"/>
+            <MenuItem Header="_Load Database" x:Name="openDatabase" Click="openDatabase_Click"/>
+            <MenuItem Header="_Add Task" x:Name="taskButton" Click="taskButton_Click"/>
+            <MenuItem Header="Drop Task" x:Name="dropTask" Click="dropTask_Click"/>
+            <Label x:Name="updateLabel"/>
+        </Menu>
+        <ScrollViewer HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0">
+            <DataGrid ItemsSource="{Binding Tasks, Mode=TwoWay}" AutoGenerateColumns="False" x:Name="dataGrid" CanUserSortColumns="False" CellEditEnding="dataGrid_CellEditEnding">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" MinWidth="100"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" MinWidth="200"/>
+                    <DataGridTemplateColumn Header="Up">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="upButton" Click="upButton_Click" FontFamily="Marlett">5</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Down">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="downButton" Click="downButton_Click" FontFamily="Marlett">6</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </Grid>
+</Window>
